@@ -1,28 +1,21 @@
-import { Fragment } from 'react';
-import { useOrderAmountStore } from "./OrderAmount.tsx";
+import {Fragment, useState} from 'react';
 import { priceTotalViewStyle } from "./style/PriceTotalView.css.ts";
-import { useSizePriceStore } from "./MenuSize.tsx";
-import { useOptionsPriceStore } from "../../SelectOptions/components/OptionalMenu.tsx";
+import {useOrderReducer} from "../MenuDetail.tsx";
 
-type PriceTotalViewProps = {
-    menuPrice: number;
-}
 
-function PriceTotalView({ menuPrice }: PriceTotalViewProps) {
-    const {price} = useSizePriceStore();
-    const {optionTotal} = useOptionsPriceStore();
-    const {amount} = useOrderAmountStore();
-    let result;
+function PriceTotalView() {
+    const [totalPrice, setTotalPrice] = useState<number>();
 
-    if (price == 0) {
-        result = (menuPrice * amount) + optionTotal;
-    } else {
-        result = (price * amount) + optionTotal;
-    }
+    useOrderReducer.subscribe((state, _) => {
+        if (state.query === undefined) return;
+        const basePrice = state.query.product.price;
+        const totalPrice = state.query.options.reduce((acc, price) => acc + (price.price * price.amount), basePrice);
+        setTotalPrice(totalPrice);
+    })
 
     return (
         <Fragment>
-            <p className={priceTotalViewStyle.total}>{result.toLocaleString()}</p>
+            <p className={priceTotalViewStyle.total}>{totalPrice?.toLocaleString()}</p>
         </Fragment>
     );
 }

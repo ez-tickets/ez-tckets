@@ -1,6 +1,5 @@
 import { Fragment } from 'react';
 import { Link } from "react-router-dom";
-import { useOptionsPriceStore } from "../../SelectOptions/components/OptionalMenu.tsx";
 import { useSizePriceStore } from "./MenuSize.tsx";
 import { useOrderAmountStore } from "./OrderAmount.tsx";
 import { useSlideAnimeStore } from "../../home/Home.tsx";
@@ -12,14 +11,12 @@ type TopNavProps = {
 }
 
 function TopNav({menuName}: TopNavProps) {
-    const {resetOptionTotal} = useOptionsPriceStore();
     const {resetPrice} = useSizePriceStore();
     const {resetAmount}  = useOrderAmountStore();
     const {changeLeftAnimation} = useSlideAnimeStore();
 
 
     const backHandler = () => {
-        resetOptionTotal();
         resetPrice();
         resetAmount();
         changeLeftAnimation();

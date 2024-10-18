@@ -3,6 +3,7 @@ import { create } from "zustand";
 import decrementSVG from "../../../assets/decrement.svg";
 import incrementSVG from "../../../assets/increment.svg";
 import { orderAmountStyle } from "./style/OrderAmount.css.ts";
+import {decreaseAmount, increaseAmount, useOrderReducer} from "../MenuDetail.tsx";
 
 type OrderAmount = {
     amount: number;
@@ -21,8 +22,19 @@ export const useOrderAmountStore = create<OrderAmount>()((set) => ({
 
 function OrderAmount() {
     const {amount, inc, dec} = useOrderAmountStore();
+    const { dispatch } = useOrderReducer();
     const maxAmount = 10;
     const minAmount = 1;
+
+    const incHandler = () => {
+        inc()
+        dispatch(increaseAmount())
+    }
+
+    const decHandler = () => {
+        dec()
+        dispatch(decreaseAmount())
+    }
 
     return (
         <Fragment>
@@ -30,7 +42,7 @@ function OrderAmount() {
 
             <button
                 className={orderAmountStyle.decrementButton}
-                onClick={dec}
+                onClick={decHandler}
                 disabled={amount <= minAmount}
             >
                 <img src={decrementSVG} alt="減らす"/>
@@ -40,7 +52,7 @@ function OrderAmount() {
 
             <button
                 className={orderAmountStyle.incrementButton}
-                onClick={inc}
+                onClick={incHandler}
                 disabled={amount >= maxAmount}
             >
                 <img src={incrementSVG}　alt="増やす"/>

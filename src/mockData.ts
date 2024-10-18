@@ -26,6 +26,7 @@ export const menuData: Menu[] = [
 ];
 
 export const selectMenuData1: SelectMenu = {
+    id: "1",
     name: "sampleMenu",
     image: sampleMenu1,
     description: "サンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキスト",
@@ -36,26 +37,17 @@ export const selectMenuData1: SelectMenu = {
     ],
     options: [
         { id: "1", name: "キャラメルソース", price: 50 },
-        { id: "2", name: "ねぎ", 　　　　　　price: 100 },
-        { id: "3", name: "もやし", 　　　　　price: 150 },
-        { id: "4", name: "チョコレート", 　　price: 20 },
-        { id: "5", name: "バニラ", 　　　　　price: 80 },
-        { id: "6", name: "バニラ", 　　　　　price: 80 },
-        { id: "7", name: "バニラ", 　　　　　price: 80 },
-        { id: "8", name: "バニラ", 　　　　　price: 80 },
-        { id: "9", name: "バニラ", 　　　　　price: 80 },
-        { id: "10", name: "バニラ", 　　　　　price: 80 },
-        { id: "11", name: "バニラ", 　　　　　price: 80 },
-        { id: "12", name: "バニラ", 　　　　　price: 80 },
-        { id: "13", name: "バニラ", 　　　　　price: 80 },
-        { id: "14", name: "バニラ", 　　　　　price: 80 },
-        { id: "15", name: "バニラ", 　　　　　price: 80 },
+        { id: "2", name: "ねぎ",           price: 100 },
+        { id: "3", name: "もやし",         price: 150 },
+        { id: "4", name: "チョコレート",     price: 20 },
+        { id: "5", name: "バニラ",           price: 80 },
     ],
     price: 850
 }
 
 //optionがなければ複数選択できるようにしたい
 export const selectMenuData2: SelectMenu = {
+    id: "1",
     name: "sampleMenu",
     image: sampleMenu2,
     description: "サンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキスト",

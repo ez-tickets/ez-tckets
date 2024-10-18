@@ -32,7 +32,7 @@ export const selectOptionsStyle = ({
         borderTop: "1px solid gainsboro",
         textAlign: "center",
         flex: "1",
-        marginBottom: "40px",
+        marginBottom: "60px",
         overflowY: "auto",
         paddingBottom: "30px",
     }),
@@ -44,7 +44,7 @@ export const selectOptionsStyle = ({
 
     footer: style({
         // backgroundColor: "#ffd700", //カートの中に商品が入っている時の色
-        backgroundColor: "lightgray",  //注文の品がない時の色
+        backgroundColor: "white",  //注文の品がない時の色
         textAlign: "center",
         padding: "20px",
         position: "fixed",
@@ -54,4 +54,12 @@ export const selectOptionsStyle = ({
         zIndex: 1,
         boxShadow: "0 -1px 2px gray"
     }),
+
+    confirmButton: style({
+        padding: "10px 20px",
+        backgroundColor: "gold",
+        border: "1px solid rgba(0,0,0,0.2)",
+        borderRadius: "5px",
+        width: "100%",
+    })
 })

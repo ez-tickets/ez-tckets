@@ -4,13 +4,50 @@ import MenuSizeContainer from "./MenuSizeContainer.tsx";
 import { SelectMenu } from "../../../dataTypes.ts";
 import { useSlideAnimeStore } from "../../home/Home.tsx";
 import { menuDescriptionStyle } from "./style/MenuDescription.css.ts";
+import SelectedOptionsView from "./SelectedOptionsView.tsx";
+import { create } from "zustand/index";
 
 type MenuDescriptionProps = {
     data: SelectMenu;
 }
 
+export type OrderOptions = {
+    id: string;
+    name: string;
+    price: number;
+    amount: number;
+}
+
+type OptionsDetail = {
+    initOptions: OrderOptions[];
+    stateOptions: OrderOptions[];
+    initOptionsAddHandler: (optionsDetail: OrderOptions[]) => void;
+    stateOptionsAddHandler: (optionsDetail: OrderOptions[]) => void;
+    resetHandler: () => void;
+}
+
+export const useSelectedOptionsStore = create<OptionsDetail>()((set) => ({
+    initOptions: [],
+    stateOptions: [],
+    initOptionsAddHandler: (optionsDetail) => set({initOptions: optionsDetail}),
+    stateOptionsAddHandler: (optionsDetail) => set({stateOptions: optionsDetail}),
+    resetHandler: () => set({initOptions: [], stateOptions: []}),
+}))
+
 function MenuDescription({data}: MenuDescriptionProps) {
+    const {initOptions, initOptionsAddHandler} = useSelectedOptionsStore();
     const {changeLeftAnimation} = useSlideAnimeStore();
+
+    const newOptions =
+        data.options.map((option) => ({
+            ...option, amount: 0
+        }))
+
+    const moveOptionScreenHandler = () => {
+        if (initOptions.length == 0) {
+            initOptionsAddHandler(newOptions);
+        }
+    }
 
     return (
         <Fragment>
@@ -30,9 +67,15 @@ function MenuDescription({data}: MenuDescriptionProps) {
                         to={"/SelectOptions"}
                         onClick={changeLeftAnimation}
                     >
-                        <button className={menuDescriptionStyle.toppingButton}>Topping</button>
+                        <button
+                            className={menuDescriptionStyle.toppingButton}
+                            onClick={moveOptionScreenHandler}
+                        >
+                            Topping
+                        </button>
                     </Link> : ""
                 }
+                <SelectedOptionsView/>
             </div>
         </Fragment>
     );
